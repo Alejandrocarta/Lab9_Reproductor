@@ -8,11 +8,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -45,7 +48,6 @@ public class MusicPlayerGUI extends JFrame {
     private JButton addButton;
     private JButton selectButton;
     private JButton nextButton;
-    private JButton previousButton;
     private JList<String> playlist;
     private DefaultListModel<String> listModel;
     private JProgressBar progressBar;
@@ -53,7 +55,7 @@ public class MusicPlayerGUI extends JFrame {
     private Timer timer;
     private JLabel durationLabel;
     private JLabel currentPositionLabel;
-
+    
     public MusicPlayerGUI() {
         player = new MusicPlayer();
         listModel = new DefaultListModel<>();

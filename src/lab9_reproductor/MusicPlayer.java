@@ -32,8 +32,8 @@ public class MusicPlayer {
     private long currentMicroseconds;
     private long totalMicroseconds;
     private Clip clip;
-    private long pausedMicroseconds; // Nueva variable para guardar la posición de la canción cuando se pausa
-    private boolean wasPaused; // Nueva variable para indicar si la canción estaba pausada al detenerse
+    private long pausedMicroseconds; 
+    private boolean wasPaused; 
 
     private static final String MUSIC_FOLDER = "Musica/";
 
@@ -75,17 +75,17 @@ public class MusicPlayer {
             isPlaying = true;
             String filePath = playlist.get(currentSongIndex);
             try {
-                if (clip == null || !clip.isOpen()) { // Si el Clip no existe o no está abierto, crear un nuevo Clip
+                if (clip == null || !clip.isOpen()) { 
                     File file = new File(filePath);
                     AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
                     clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
                     totalMicroseconds = clip.getMicrosecondLength();
                 }
-                if (wasPaused) { // Si la canción estaba pausada, reanudar desde la posición pausada
+                if (wasPaused) { 
                     clip.setMicrosecondPosition(pausedMicroseconds);
                 } else {
-                    clip.setMicrosecondPosition(0); // Iniciar la canción desde el principio solo si no estaba pausada
+                    clip.setMicrosecondPosition(0);
                 }
                 clip.start();
 
@@ -135,10 +135,13 @@ public class MusicPlayer {
     public void nextSong() {
         if (currentSongIndex < playlist.size() - 1) {
             currentSongIndex++;
+            wasPaused = false;
+            pausedMicroseconds = 0;
             stop();
             play();
         }
     }
+    
     
     public long getCurrentMicroseconds() {
         return currentMicroseconds;
